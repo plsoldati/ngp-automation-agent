@@ -607,110 +607,16 @@ Notion record created automatically."""
         self.zapier_blueprints = [blueprint_1, blueprint_2, blueprint_3, blueprint_4]
 print(f"✅ Created {len(self.zapier_blueprints)} detailed Zapier automation blueprints!")
 
-# Create a Notion page with all blueprints
-self.create_blueprint_page()
+# Print the blueprints for easy access
+for i, blueprint in enumerate(self.zapier_blueprints, 1):
+    print(f"\n{'='*50}")
+    print(f"BLUEPRINT {i}: {blueprint['name']}")
+    print(f"{'='*50}")
+    print(json.dumps(blueprint, indent=2))
 
-def create_blueprint_page(self):
-    """Create a Notion page with all Zapier blueprints"""
+return self.zapier_blueprints
     
-    print("\n📄 Creating Zapier Blueprints Page in Notion...")
-    
-    if not self.notion_token:
-        print("⚠️ Cannot create blueprint page: No Notion token")
-        return False
-    
-    headers = {
-        "Authorization": f"Bearer {self.notion_token}",
-        "Content-Type": "application/json",
-        "Notion-Version": "2022-06-28"
-    }
-    
-    # Create page content with all blueprints
-    page_content = []
-    
-    # Add title
-    page_content.append({
-        "object": "block",
-        "type": "heading_1",
-        "heading_1": {
-            "rich_text": [{"type": "text", "text": {"content": "NGP Zapier Automation Blueprints"}}]
-        }
-    })
-    
-    # Add each blueprint
-    for i, blueprint in enumerate(self.zapier_blueprints, 1):
-        # Blueprint title
-        page_content.append({
-            "object": "block",
-            "type": "heading_2",
-            "heading_2": {
-                "rich_text": [{"type": "text", "text": {"content": f"Blueprint {i}: {blueprint['name']}"}}]
-            }
-        })
-        
-        # Blueprint purpose
-        page_content.append({
-            "object": "block",
-            "type": "paragraph",
-            "paragraph": {
-                "rich_text": [{"type": "text", "text": {"content": f"Purpose: {blueprint['purpose']}"}}]
-            }
-        })
-        
-        # Blueprint steps as code block
-        page_content.append({
-            "object": "block",
-            "type": "code",
-            "code": {
-                "rich_text": [{"type": "text", "text": {"content": json.dumps(blueprint, indent=2)}}],
-                "language": "json"
-            }
-        })
-    
-    # Create the page
-    try:
-        # First get a parent page
-        search_url = "https://api.notion.com/v1/search"
-        search_data = {"filter": {"value": "page", "property": "object"}}
-        search_response = requests.post(search_url, headers=headers, json=search_data)
-        
-        if search_response.status_code == 200:
-            pages = search_response.json()["results"]
-            if pages:
-                parent_page_id = pages[0]["id"]
-                
-                # Create the blueprint page
-                create_url = "https://api.notion.com/v1/pages"
-                page_data = {
-                    "parent": {"page_id": parent_page_id},
-                    "properties": {
-                        "title": {
-                            "title": [{"text": {"content": "NGP Zapier Automation Blueprints"}}]
-                        }
-                    },
-                    "children": page_content
-                }
-                
-                response = requests.post(create_url, headers=headers, json=page_data)
-                
-                if response.status_code == 200:
-                    page_data = response.json()
-                    page_url = page_data["url"]
-                    print(f"✅ Blueprint page created successfully!")
-                    print(f"🔗 Access your blueprints at: {page_url}")
-                    return True
-                else:
-                    print(f"❌ Failed to create blueprint page: {response.status_code}")
-                    print(f"Error: {response.text}")
-                    return False
-        
-    except Exception as e:
-        print(f"❌ Error creating blueprint page: {str(e)}")
-        return False
-
-        return self.zapier_blueprints
-    
-def generate_deployment_guide(self):
+    def generate_deployment_guide(self):
         """Generate complete deployment and setup guide"""
         
         guide = f"""
@@ -871,7 +777,7 @@ Your automation system will be live and processing clients automatically! 🎉
         
         return guide
     
-def run_complete_setup(self):
+    def run_complete_setup(self):
         """Execute the complete automation setup"""
         
         print("🚀 Starting NGP Complete Automation Setup...")
