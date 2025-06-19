@@ -354,9 +354,18 @@ class NGPAutomationAgent:
             # Use the first page as parent
             parent_page_id = pages[0]["id"]
             self.master_schema["parent"]["page_id"] = parent_page_id
+
+            # Fix the title access for different page types
+            try:
+                if 'title' in pages[0]['properties'] and pages[0]['properties']['title']['title']:
+                    page_title = pages[0]['properties']['title']['title'][0]['text']['content']
+                else:
+                    page_title = 'Untitled'
+                except:
+                    page_title = 'Untitled'
             
-            print(f"📄 Using parent page: {pages[0]['properties']['title']['title'][0]['text']['content'] if pages[0]['properties']['title']['title'] else 'Untitled'}")
-            
+            print(f"📄 Using parent page: {page_title}")
+
             # Create the database
             response = requests.post(url, headers=headers, json=self.master_schema)
             
