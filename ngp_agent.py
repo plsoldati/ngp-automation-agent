@@ -871,7 +871,7 @@ Your automation system will be live and processing clients automatically! 🎉
         
         return guide
     
-    def run_complete_setup(self):
+def run_complete_setup(self):
         """Execute the complete automation setup"""
         
         print("🚀 Starting NGP Complete Automation Setup...")
