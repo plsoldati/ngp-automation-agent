@@ -367,6 +367,7 @@ class NGPAutomationAgent:
             print(f"📄 Using parent page: {page_title}")
 
             # Create the database
+            self.master_schema["parent"]["page_id"] = parent_page_id
             response = requests.post(url, headers=headers, json=self.master_schema)
             
             if response.status_code == 200:
