@@ -708,7 +708,7 @@ def create_blueprint_page(self):
         print(f"❌ Error creating blueprint page: {str(e)}")
         return False
 
-return self.zapier_blueprints
+        return self.zapier_blueprints
     
 def generate_deployment_guide(self):
         """Generate complete deployment and setup guide"""
