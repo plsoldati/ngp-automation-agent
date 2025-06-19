@@ -710,7 +710,7 @@ def create_blueprint_page(self):
 
 return self.zapier_blueprints
     
-    def generate_deployment_guide(self):
+def generate_deployment_guide(self):
         """Generate complete deployment and setup guide"""
         
         guide = f"""
