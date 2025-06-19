@@ -258,9 +258,9 @@ class NGPAutomationAgent:
                     "multi_select": {
                         "options": [
                             {"name": "Show me step-by-step and let me try", "color": "green"},
-                            {"name": "Explain it first, then demonstrate", "color": "blue"},
+                            {"name": "Explain it first then demonstrate", "color": "blue"},
                             {"name": "Give me written instructions to follow", "color": "orange"},
-                            {"name": "Let me try first, then help if needed", "color": "purple"}
+                            {"name": "Let me try first then help if needed", "color": "purple"}
                         ]
                     }
                 },
@@ -605,8 +605,16 @@ Notion record created automatically."""
         }
         
         self.zapier_blueprints = [blueprint_1, blueprint_2, blueprint_3, blueprint_4]
-        print(f"✅ Created {len(self.zapier_blueprints)} Zapier automation blueprints")
-        return self.zapier_blueprints
+print(f"✅ Created {len(self.zapier_blueprints)} detailed Zapier automation blueprints!")
+
+# Print the blueprints for easy access
+for i, blueprint in enumerate(self.zapier_blueprints, 1):
+    print(f"\n{'='*50}")
+    print(f"BLUEPRINT {i}: {blueprint['name']}")
+    print(f"{'='*50}")
+    print(json.dumps(blueprint, indent=2))
+
+return self.zapier_blueprints
     
     def generate_deployment_guide(self):
         """Generate complete deployment and setup guide"""
