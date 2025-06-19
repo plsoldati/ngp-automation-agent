@@ -154,7 +154,7 @@ class NGPAutomationAgent:
         # Define the complete database schema
         self.master_schema = {
             "parent": {"type": "page_id", "page_id": ""},
-            "title": [{"type": "text", "text": {"content": "NGP Master Client Database"}}],
+            "title": [{"text": {"content": "NGP Master Client Database"}}],
             "properties": {
                 "Email (Primary Key)": {"email": {}},
                 "First Name": {"rich_text": {}},
