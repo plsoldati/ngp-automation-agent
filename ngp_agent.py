@@ -361,8 +361,8 @@ class NGPAutomationAgent:
                     page_title = pages[0]['properties']['title']['title'][0]['text']['content']
                 else:
                     page_title = 'Untitled'
-                except:
-                    page_title = 'Untitled'
+            except:
+                page_title = 'Untitled'
             
             print(f"📄 Using parent page: {page_title}")
 
